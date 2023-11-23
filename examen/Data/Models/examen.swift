@@ -21,16 +21,21 @@ struct StepCount: Identifiable {
     }
 }
 
+struct StepCountCountries: Identifiable {
+    let id = UUID()
+    let country: String
+    let steps: Int
+    
+    init(country: String, steps: Int) {
+        self.country = country
+        self.steps = steps
+    }
+}
 
-let currentWeek: [StepCount] = [
-    StepCount(day: "2022-07-17", steps: 4200),
-    StepCount(day: "2022-07-18", steps: 15000),
-    StepCount(day: "2022-07-19", steps: 2800),
-    StepCount(day: "2022-07-20", steps: 10800),
-    StepCount(day: "2022-07-21", steps: 5300),
-    StepCount(day: "2022-07-22", steps: 10400),
-    StepCount(day: "2022-07-23", steps: 4000)
-]
+struct CountryData: Codable {
+    var country: String
+    var amount: Int
+}
 
 struct Fetching: Codable {
     var data: [Regions]

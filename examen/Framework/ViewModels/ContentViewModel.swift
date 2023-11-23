@@ -41,8 +41,6 @@ class ContentViewModel: ObservableObject {
         
         for res in result! {
             if (counter == 0) {
-                let allCDays = [Case]()
-                
                 for _case in res.cases {
                     let cJson = CaseJson(key: _case.key, value: _case.value)
                     
@@ -53,21 +51,11 @@ class ContentViewModel: ObservableObject {
                             total = total + element.value
                         }
                     }
-
                     let cDay = StepCount(day: cJson.key, steps: total)
                     self.list.append(cDay)
                 }
             }
             counter = counter + 1
         }
-        
-    
-            
-//        let usersData: ListUsersData = ListUsersData(users: result!.data.users)
-//
-//        for user in usersData.users {
-//            let goodUser = UserBase(id: user._id, _id: user._id, firstName: user.firstName)
-//            self.list.append(goodUser)
-//        }
     }
 }
