@@ -5,14 +5,6 @@
 //  Created by Rodrigo Terán Hernández on 23/11/23.
 //
 
-//import SwiftUI
-
-//struct DataView: View {
-//    var body: some View {
-//        Text("Datos")
-//    }
-//}
-
 import SwiftUI
 import Charts
 
@@ -21,7 +13,7 @@ struct DataView: View {
     
     var body: some View {
         VStack {
-            GroupBox ("Países") {
+            GroupBox("Comparación entre países") {
                 Chart(dataViewModel.list) {
                     BarMark(
                         x: .value("País", $0.country),
