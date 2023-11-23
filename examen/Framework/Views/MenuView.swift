@@ -15,7 +15,7 @@ struct MenuView: View {
                 Text("Casos")
             }
             DataView().tabItem {
-                Image(systemName: "book.fill")
+                Image(systemName: "list.dash")
                 Text("Países")
             }
         }
