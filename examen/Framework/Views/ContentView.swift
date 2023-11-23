@@ -35,10 +35,10 @@ struct ContentView: View {
                 } label: {
                     HStack(spacing: 10) {
                         Group {
-                            Image(systemName: "info.circle.fill")
-                                .tint(Color(UIColor.systemPurple))
+                            Image(systemName: "location")
+                                .tint(Color(UIColor.blue))
                             Text("Traer datos")
-                                .foregroundColor(Color(UIColor.systemPurple))
+                                .foregroundColor(Color(UIColor.blue))
                                 .bold()
                         }
                         .padding([.top, .bottom], 10)
@@ -46,7 +46,7 @@ struct ContentView: View {
                     .frame(maxWidth: .infinity)
                     .overlay(
                         Rectangle()
-                            .stroke(Color(UIColor.systemPurple), lineWidth: 1)
+                            .stroke(Color(UIColor.blue), lineWidth: 1)
                     )
                 }
             }
