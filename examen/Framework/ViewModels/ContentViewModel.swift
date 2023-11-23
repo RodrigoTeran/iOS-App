@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 class ContentViewModel: ObservableObject {
     @Published var list = [UserBase]()
     

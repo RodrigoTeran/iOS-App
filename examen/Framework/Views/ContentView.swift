@@ -7,20 +7,11 @@
 
 import SwiftUI
 
-/// <#Description#>
 struct ContentView: View {
     @StateObject var contentViewModel = ContentViewModel()
     
     var body: some View {
-        List(contentViewModel.list) { userBase in
-            Text(userBase.firstName)
-        }
-        .onAppear {
-            Task {
-                await contentViewModel.geElementList()
-            }
-        }
-        .padding()
+        Text("Casos")
     }
 }
 
