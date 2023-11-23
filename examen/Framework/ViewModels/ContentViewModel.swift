@@ -8,29 +8,66 @@
 import Foundation
 
 class ContentViewModel: ObservableObject {
-    @Published var list = [UserBase]()
+    @Published var list = [StepCount]()
     @Published var value = ""
     @Published var pickerValue = 0
     
-    var listRequirement: UserListRequirementProtocol
+    var listRequirement: CasesListRequirementProtocol
 
     init(
-        listRequirement: UserListRequirementProtocol = UserListRequirement.shared
+        listRequirement: CasesListRequirementProtocol = CasesListRequirement.shared
     ) {
         self.listRequirement = listRequirement
     }
     
     @MainActor
-    func geElementList() async {
-        let result = await listRequirement.geElementList()
+    func getElementList() async {
+        var type = ""
+        self.list = [StepCount]()
+        
+        if (pickerValue == 0) {
+            type = "cases"
+        } else {
+            type = "deaths"
+        }
+        
+        let result = await listRequirement.getElementList(country: value, type: type)
+        
         if (result == nil) {
             return
         }
-        let usersData: ListUsersData = ListUsersData(users: result!.data.users)
+                
+        var counter = 0
         
-        for user in usersData.users {
-            let goodUser = UserBase(id: user._id, _id: user._id, firstName: user.firstName)
-            self.list.append(goodUser)
+        for res in result! {
+            if (counter == 0) {
+                let allCDays = [Case]()
+                
+                for _case in res.cases {
+                    let cJson = CaseJson(key: _case.key, value: _case.value)
+                    
+                    var total = 0
+                    
+                    for element in cJson.value {
+                        if (element.key == "total") {
+                            total = total + element.value
+                        }
+                    }
+
+                    let cDay = StepCount(day: cJson.key, steps: total)
+                    self.list.append(cDay)
+                }
+            }
+            counter = counter + 1
         }
+        
+    
+            
+//        let usersData: ListUsersData = ListUsersData(users: result!.data.users)
+//
+//        for user in usersData.users {
+//            let goodUser = UserBase(id: user._id, _id: user._id, firstName: user.firstName)
+//            self.list.append(goodUser)
+//        }
     }
 }

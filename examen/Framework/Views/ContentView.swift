@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct ContentView: View {
     @StateObject var contentViewModel = ContentViewModel()
@@ -29,7 +30,9 @@ struct ContentView: View {
                 })
                 .frame(height: 200)
                 Button {
-                    print("get info")
+                    Task {
+                        await contentViewModel.getElementList()
+                    }
                 } label: {
                     HStack(spacing: 10) {
                         Group {
@@ -46,6 +49,16 @@ struct ContentView: View {
                         Rectangle()
                             .stroke(Color(UIColor.blue), lineWidth: 1)
                     )
+                }
+                Spacer().frame(height: 50)
+                GroupBox ("Casos de covid-19 en el tiempo") {
+                    Chart(contentViewModel.list) {
+                        LineMark(
+                            x: .value("Week Day", $0.weekday, unit: .day),
+                            y: .value("Step Count", $0.steps)
+                        )
+                        
+                    }
                 }
             }
             .padding()

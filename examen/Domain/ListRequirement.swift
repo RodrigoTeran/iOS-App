@@ -7,20 +7,20 @@
 
 import Foundation
 
-protocol UserListRequirementProtocol {
-    func geElementList() async -> Examen?
+protocol CasesListRequirementProtocol {
+    func getElementList(country: String, type: String) async -> [Regions]?
 }
 
 
-class UserListRequirement: UserListRequirementProtocol {
+class CasesListRequirement: CasesListRequirementProtocol {
     let dataRepository: ListRepository
-    static let shared = UserListRequirement()
+    static let shared = CasesListRequirement()
 
     init(dataRepository: ListRepository = ListRepository.shared) {
         self.dataRepository = dataRepository
     }
     
-    func geElementList() async -> Examen? {
-        return await dataRepository.geElementList()
+    func getElementList(country: String, type: String) async -> [Regions]? {
+        return await dataRepository.getElementList(country: country, type: type)
     }
 }

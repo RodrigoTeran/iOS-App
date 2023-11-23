@@ -21,7 +21,6 @@
 		095D54FD2B0FA04E00DEAF36 /* ListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095D54FC2B0FA04E00DEAF36 /* ListRepository.swift */; };
 		095D54FF2B0FA06200DEAF36 /* NetworkAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095D54FE2B0FA06200DEAF36 /* NetworkAPIService.swift */; };
 		095D55012B0FA09200DEAF36 /* examen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095D55002B0FA09200DEAF36 /* examen.swift */; };
-		095D55052B0FABDA00DEAF36 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095D55042B0FABDA00DEAF36 /* RequestInterceptor.swift */; };
 		095D550C2B0FC22D00DEAF36 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095D550B2B0FC22D00DEAF36 /* MenuView.swift */; };
 		095D550E2B0FC24900DEAF36 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095D550D2B0FC24900DEAF36 /* DataView.swift */; };
 /* End PBXBuildFile section */
@@ -59,7 +58,6 @@
 		095D54FC2B0FA04E00DEAF36 /* ListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRepository.swift; sourceTree = "<group>"; };
 		095D54FE2B0FA06200DEAF36 /* NetworkAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPIService.swift; sourceTree = "<group>"; };
 		095D55002B0FA09200DEAF36 /* examen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = examen.swift; sourceTree = "<group>"; };
-		095D55042B0FABDA00DEAF36 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
 		095D550B2B0FC22D00DEAF36 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		095D550D2B0FC24900DEAF36 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,7 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				095D54FE2B0FA06200DEAF36 /* NetworkAPIService.swift */,
-				095D55042B0FABDA00DEAF36 /* RequestInterceptor.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -361,7 +358,6 @@
 				095D54FB2B0FA03E00DEAF36 /* ListRequirement.swift in Sources */,
 				095D550E2B0FC24900DEAF36 /* DataView.swift in Sources */,
 				095D54FD2B0FA04E00DEAF36 /* ListRepository.swift in Sources */,
-				095D55052B0FABDA00DEAF36 /* RequestInterceptor.swift in Sources */,
 				095D550C2B0FC22D00DEAF36 /* MenuView.swift in Sources */,
 				095D54FF2B0FA06200DEAF36 /* NetworkAPIService.swift in Sources */,
 				095D54C12B0F9DA200DEAF36 /* examenApp.swift in Sources */,
