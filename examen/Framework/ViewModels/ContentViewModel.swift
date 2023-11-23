@@ -9,6 +9,8 @@ import Foundation
 
 class ContentViewModel: ObservableObject {
     @Published var list = [UserBase]()
+    @Published var value = ""
+    @Published var pickerValue = 0
     
     var listRequirement: UserListRequirementProtocol
 

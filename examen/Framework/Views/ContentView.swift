@@ -9,8 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var contentViewModel = ContentViewModel()
-    @State var value = ""
-    @State var pickerValue = 0
     
     var body: some View {
         ScrollView {
@@ -19,9 +17,9 @@ struct ContentView: View {
                     .font(.largeTitle)
                 Form(content: {
                     Section(header: Text("País")) {
-                        TextField("Mexico", text: $value)
+                        TextField("Mexico", text: $contentViewModel.value)
                     }
-                    Picker(selection: $pickerValue) {
+                    Picker(selection: $contentViewModel.pickerValue) {
                         Text("Casos").tag(0)
                         Text("Muertes").tag(1)
                     } label: {
@@ -31,7 +29,7 @@ struct ContentView: View {
                 })
                 .frame(height: 200)
                 Button {
-                    print("log out")
+                    print("get info")
                 } label: {
                     HStack(spacing: 10) {
                         Group {
