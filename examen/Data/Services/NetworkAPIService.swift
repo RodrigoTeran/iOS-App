@@ -39,12 +39,9 @@ class NetworkAPIService {
         
         let response = await taskRequest.serializingData().response
         
-        print(response.result)
-
         switch response.result {
         case .success(let data):
             do {
-                print(data)
                 return try JSONDecoder().decode([Regions].self, from: data)
             } catch {
                 return nil
