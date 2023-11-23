@@ -62,6 +62,12 @@ struct ContentView: View {
                 }
             }
             .padding()
+            .alert(isPresented: $contentViewModel.showErrorMsg) {
+                Alert(
+                    title: Text("Oops!"),
+                    message: Text(contentViewModel.errorMsg)
+                )
+            }
         }
     }
 }
