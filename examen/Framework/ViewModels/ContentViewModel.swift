@@ -7,30 +7,80 @@
 
 import Foundation
 
-import Foundation
-
 class ContentViewModel: ObservableObject {
-    @Published var list = [UserBase]()
+    @Published var list = [StepCount]()
+    @Published var value = ""
+    @Published var pickerValue = 0
     
-    var listRequirement: UserListRequirementProtocol
+    @Published var showErrorMsg = false
+    @Published var errorMsg = ""
+    
+    var listRequirement: CasesListRequirementProtocol
 
     init(
-        listRequirement: UserListRequirementProtocol = UserListRequirement.shared
+        listRequirement: CasesListRequirementProtocol = CasesListRequirement.shared
     ) {
         self.listRequirement = listRequirement
     }
     
+    func validCountry() -> Bool {
+        if (self.value == "") {
+            self.showErrorMsg = true
+            self.errorMsg = "Debes de poner un país válido"
+            return false
+        }
+        
+        return true
+    }
+    
     @MainActor
-    func geElementList() async {
-        let result = await listRequirement.geElementList()
-        if (result == nil) {
+    func getElementList() async {
+        var type = ""
+        self.list = [StepCount]()
+        
+        if (pickerValue == 0) {
+            type = "cases"
+        } else {
+            type = "deaths"
+        }
+        
+        if (!validCountry()) {
             return
         }
-        let usersData: ListUsersData = ListUsersData(users: result!.data.users)
         
-        for user in usersData.users {
-            let goodUser = UserBase(id: user._id, _id: user._id, firstName: user.firstName)
-            self.list.append(goodUser)
+        let result = await listRequirement.getElementList(country: value, type: type)
+    
+        if (result == nil) {
+            self.showErrorMsg = true
+            self.errorMsg = "El país no fue válido"
+            return
+        }
+        
+        if (result?.count == 0) {
+            self.showErrorMsg = true
+            self.errorMsg = "El país no fue válido"
+            return
+        }
+                
+        var counter = 0
+        
+        for res in result! {
+            if (counter == 0) {
+                for _case in res.cases {
+                    let cJson = CaseJson(key: _case.key, value: _case.value)
+                    
+                    var total = 0
+                    
+                    for element in cJson.value {
+                        if (element.key == "total") {
+                            total = total + element.value
+                        }
+                    }
+                    let cDay = StepCount(day: cJson.key, steps: total)
+                    self.list.append(cDay)
+                }
+            }
+            counter = counter + 1
         }
     }
 }

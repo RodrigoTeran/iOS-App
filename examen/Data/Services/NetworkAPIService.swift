@@ -10,15 +10,11 @@ import Alamofire
 
 class APIManager {
     class func headers() -> HTTPHeaders {
-        var headers: HTTPHeaders = [
+        let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "user-platform": "ios"
+            "x-api-key": "G4bfhahLLkbwQemrRapXbA==CnH99c5e3kmt8eS3"
         ]
-        
-        let authToken = "..."
-        
-        headers["Authorization"] = "Bearer" + " " + authToken
 
         return headers
     }
@@ -27,20 +23,26 @@ class APIManager {
 class NetworkAPIService {
     static let shared = NetworkAPIService()
     
-    func geElementList(url: URL) async -> Examen? {
+    func getElementList(url: URL, country: String, type: String) async -> [Regions]? {
+        
+        let parameters : Parameters = [
+            "country" : country,
+            "type": type
+        ]
         
         let taskRequest = AF.request(
             url,
             method: .get,
+            parameters: parameters,
             headers: APIManager.headers()
         ).validate()
         
         let response = await taskRequest.serializingData().response
-
+        
         switch response.result {
         case .success(let data):
             do {
-                return try JSONDecoder().decode(Examen.self, from: data)
+                return try JSONDecoder().decode([Regions].self, from: data)
             } catch {
                 return nil
             }
