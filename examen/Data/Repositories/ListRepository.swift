@@ -8,15 +8,15 @@
 import Foundation
 
 struct Api {
-    static let base = "http://localhost:3001/v1"
+    static let base = "https://api.api-ninjas.com/v1"
     
     struct routes {
-        static let user = "/user"
+        static let covid = "/covid19"
     }
 }
 
 protocol ListAPIProtocol {
-    func geElementList() async -> Examen?
+    func getElementList(country: String, type: String) async -> [Regions]?
 }
 
 class ListRepository: ListAPIProtocol {
@@ -27,7 +27,7 @@ class ListRepository: ListAPIProtocol {
         self.nservice = nservice
     }
 
-    func geElementList() async -> Examen? {
-        return await nservice.geElementList(url: URL(string:"\(Api.base)\(Api.routes.user)")!)
+    func getElementList(country: String, type: String) async -> [Regions]? {
+        return await nservice.getElementList(url: URL(string:"\(Api.base)\(Api.routes.covid)")!, country: country, type: type)
     }
 }
