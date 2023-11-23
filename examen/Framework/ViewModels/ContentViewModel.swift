@@ -12,12 +12,25 @@ class ContentViewModel: ObservableObject {
     @Published var value = ""
     @Published var pickerValue = 0
     
+    @Published var showErrorMsg = false
+    @Published var errorMsg = ""
+    
     var listRequirement: CasesListRequirementProtocol
 
     init(
         listRequirement: CasesListRequirementProtocol = CasesListRequirement.shared
     ) {
         self.listRequirement = listRequirement
+    }
+    
+    func validCountry() -> Bool {
+        if (self.value == "") {
+            self.showErrorMsg = true
+            self.errorMsg = "Debes de poner un país válido"
+            return false
+        }
+        
+        return true
     }
     
     @MainActor
@@ -31,9 +44,21 @@ class ContentViewModel: ObservableObject {
             type = "deaths"
         }
         
-        let result = await listRequirement.getElementList(country: value, type: type)
+        if (!validCountry()) {
+            return
+        }
         
+        let result = await listRequirement.getElementList(country: value, type: type)
+    
         if (result == nil) {
+            self.showErrorMsg = true
+            self.errorMsg = "El país no fue válido"
+            return
+        }
+        
+        if (result?.count == 0) {
+            self.showErrorMsg = true
+            self.errorMsg = "El país no fue válido"
             return
         }
                 
